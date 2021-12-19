@@ -37,7 +37,34 @@ namespace WebApiTesting.Repository
 
         public async Task<InvoiceViewModel> GetInvoice(int? invoiceId)
         {
-            throw new NotImplementedException();
+            if (db != null)
+            {
+                return await (from i in db.Invoices
+                              from c in db.Customers
+                                  //from cr in db.Currencies
+                                  //from it in db.Items
+                              where i.CustomerId == c.Id
+
+                              select new InvoiceViewModel
+                              {
+                                  Id = i.Id,
+                                  CustomerId = i.CustomerId,
+                                  CustomerName = i.Customer.Name,
+                                  DateOf = i.DateOf,
+                                  CurrencyId = i.Customer.Currency.Id,
+                                  CurrencyName = i.Customer.Currency.Name,
+                                  ItemId = i.Item.Id,
+                                  ItemName = i.Item.Name,
+                                  Unit = i.Item.Unit,
+                                  Price = (int)i.Item.Price,
+                                  Quantity = i.Quantity,
+                                  Total = i.Total,
+                                  NetTotal = i.NetTotal
+                              }
+
+                    ).FirstOrDefaultAsync();
+            }
+            return null;
         }
 
         public async Task<List<InvoiceViewModel>> GetInvoices()
