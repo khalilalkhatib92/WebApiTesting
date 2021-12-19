@@ -18,7 +18,7 @@ namespace WebApiTesting.ViewModel
         // Customer Info
         //public virtual Customer Customer { get; set; }
         public string CustomerName { get; set; }
-        public int CurrencyId { get; set; }
+        public int? CurrencyId { get; set; }
         public string CurrencyName { get; set; }
 
         // Item Info
