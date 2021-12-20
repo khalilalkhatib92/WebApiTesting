@@ -108,65 +108,153 @@ namespace WebApiTesting.Repository
             return null;
         }
 
-        public Task<int> AddCurrency(Currency currency)
+        public async Task<int> AddCurrency(Currency currency)
         {
-            throw new NotImplementedException();
+            if(db != null)
+            {
+                await db.Currencies.AddAsync(currency);
+                await db.SaveChangesAsync();
+                return currency.Id;
+            }
+            return 0;
         }
 
-        public Task<int> AddCustomer(Customer customer)
+        public async Task<int> AddCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            if (db != null)
+            {
+                await db.Customers.AddAsync(customer);
+                await db.SaveChangesAsync();
+                return customer.Id;
+            }
+            return 0;
         }
 
-        public Task<int> AddInvoice(Invoice invoice)
+        public async Task<int> AddInvoice(Invoice invoice)
         {
-            throw new NotImplementedException();
+            if (db != null)
+            {
+                await db.Invoices.AddAsync(invoice);
+                await db.SaveChangesAsync();
+                return invoice.Id;
+            }
+            return 0;
         }
 
-        public Task<int> AddItem(Item item)
+        public async Task<int> AddItem(Item item)
         {
-            throw new NotImplementedException();
+            if (db != null)
+            {
+                await db.Items.AddAsync(item);
+                await db.SaveChangesAsync();
+                return item.Id;
+            }
+            return 0;
         }
 
-        public Task<int> DeleteCurrency(int? currencyId)
+        public async Task<int> DeleteCurrency(int? currencyId)
         {
-            throw new NotImplementedException();
+            int result = 0;
+            if(db != null)
+            {
+                var currency = await db.Currencies.FirstOrDefaultAsync(x => x.Id == currencyId);
+                if(currency != null)
+                {
+                    db.Currencies.Remove(currency);
+                    result = await db.SaveChangesAsync();
+                }
+                return result;
+
+            }
+            return result;
         }
 
-        public Task<int> DeleteCustomer(int? customerId)
+        public async Task<int> DeleteCustomer(int? customerId)
         {
-            throw new NotImplementedException();
+            int result = 0;
+            if (db != null)
+            {
+                var customer = await db.Customers.FirstOrDefaultAsync(x => x.Id == customerId);
+                if (customer != null)
+                {
+                    db.Customers.Remove(customer);
+                    result = await db.SaveChangesAsync();
+                }
+                return result;
+
+            }
+            return result;
         }
 
-        public Task<int> DeleteInvoice(int? invoiceId)
+        public async Task<int> DeleteInvoice(int? invoiceId)
         {
-            throw new NotImplementedException();
+            int result = 0;
+            if (db != null)
+            {
+                var invoice = await db.Invoices.FirstOrDefaultAsync(x => x.Id == invoiceId);
+                if (invoice != null)
+                {
+                    db.Invoices.Remove(invoice);
+                    result = await db.SaveChangesAsync();
+                }
+                return result;
+
+            }
+            return result;
         }
 
-        public Task<int> DeleteItem(int? itemId)
+        public async Task<int> DeleteItem(int? itemId)
         {
-            throw new NotImplementedException();
+            int result = 0;
+            if (db != null)
+            {
+                var item = await db.Items.FirstOrDefaultAsync(x => x.Id == itemId);
+                if (item != null)
+                {
+                    db.Items.Remove(item);
+                    result = await db.SaveChangesAsync();
+                }
+                return result;
+
+            }
+            return result;
         }
 
 
-        public Task UpdateCurrency(Currency currency)
+        public async Task UpdateCurrency(Currency currency)
         {
-            throw new NotImplementedException();
+            if(db != null)
+            {
+                db.Currencies.Update(currency);
+                await db.SaveChangesAsync();
+            }
         }
 
-        public Task UpdateCustomer(Customer customer)
+        public async Task UpdateCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            if (db != null)
+            {
+                db.Customers.Update(customer);
+                await db.SaveChangesAsync();
+            }
         }
 
-        public Task UpdateInvoice(Invoice invoice)
+        public async Task UpdateInvoice(Invoice invoice)
         {
-            throw new NotImplementedException();
+            if (db != null)
+            {
+                db.Invoices.Update(invoice);
+                await db.SaveChangesAsync();
+            }
         }
 
-        public Task UpdateItem(Item item)
+        public async Task UpdateItem(Item item)
         {
-            throw new NotImplementedException();
+            if (db != null)
+            {
+                db.Items.Update(item);
+                await db.SaveChangesAsync();
+            }
         }
     }
 }
