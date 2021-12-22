@@ -43,7 +43,7 @@ namespace WebApiTesting.Repository
                               from c in db.Customers
                                   //from cr in db.Currencies
                                   //from it in db.Items
-                              where i.CustomerId == c.Id
+                              where i.Id == invoiceId
 
                               select new InvoiceViewModel
                               {

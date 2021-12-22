@@ -31,6 +31,10 @@ namespace WebApiTesting
             services.AddControllers();
             services.AddDbContext<ApiDbContext>(i => i.UseSqlServer(Configuration.GetConnectionString("ApiDbConn")));
             services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+            services.AddCors(option => option.AddPolicy("MyApiPolicy", builder => {
+                builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +50,7 @@ namespace WebApiTesting
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors("MyApiPolicy");
 
             app.UseEndpoints(endpoints =>
             {
