@@ -7,6 +7,7 @@ namespace WebApiTesting.ViewModel
 {
     public class CustomerVM
     {
+        public int MyProperty { get; set; }
 
     }
 }
