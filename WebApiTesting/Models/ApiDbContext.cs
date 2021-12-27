@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using WebApiTesting.ViewModel;
 
 #nullable disable
 
@@ -119,5 +120,7 @@ namespace WebApiTesting.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public DbSet<WebApiTesting.ViewModel.InvoiceViewModel> InvoiceViewModel { get; set; }
     }
 }
