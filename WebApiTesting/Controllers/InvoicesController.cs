@@ -9,6 +9,7 @@ using WebApiTesting.Repository;
 
 namespace WebApiTesting.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class InvoicesController : ControllerBase
